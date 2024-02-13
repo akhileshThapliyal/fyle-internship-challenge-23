@@ -1,14 +1,18 @@
-<div class="flex mt-2 items-end float-right w-1/6">
-    <label for="perPageDropdown" class="flex-initial h-5 w-2/4 block mb-2 text-sm font-medium text-zinc-950 dark:text-zinc-950">Repos per page</label>
-    <select #perPageDropdown id="perPageDropdown" 
-            [disabled]="util.isRepoDetailsObjectEmpty(repoDetails) || apiService.inProgressStatus['getAllRepos']" 
-            (change)="onPerPageSelected(perPageDropdown.value)"
-            class="flex-initial w-2/4 bg-gray-50 border border-gray-300 text-zinc-950 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-        <option selected value="10">10</option>
-        <option value="30">30</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
-    </select>
+<div class="flex mt-2 float-right items-center content-end">
+    <span class="flex-initial mr-2 block">
+        <label for="perPageDropdown" class="h-5  mb-2 text-sm font-medium text-zinc-950 dark:text-zinc-950">Repos per page</label>
+    </span>
+    <span class="flex-initial">
+        <select #perPageDropdown id="perPageDropdown" 
+        [disabled]="util.isRepoDetailsObjectEmpty(repoDetails) || apiService.inProgressStatus['getAllRepos']" 
+        (change)="onPerPageSelected(perPageDropdown.value)"
+        class="bg-gray-50 border border-gray-300 text-zinc-950 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option selected value="10">10</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+    </span>
 </div>
 <div class="clear-both"></div>
 <div class="grid grid-cols-3 gap-6 mt-2" *ngIf="!util.isRepoDetailsObjectEmpty(repoDetails) && !apiService.inProgressStatus['getAllRepos']; else noData" #focusrepo>
