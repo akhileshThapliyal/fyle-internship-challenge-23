@@ -1,0 +1,51 @@
+<div class="text-sm leading-6 mt-10" *ngIf="!util.isUserObjectEmpty(user) && !apiService.inProgressStatus['getUser']; else noData">
+    <figure class="relative flex flex-col-reverse bg-slate-100 rounded-lg p-6 dark:bg-slate-800 dark:highlight-white/5">
+        <figcaption class="flex items-center space-x-4">
+            <img src="{{user.avatar_url}}" alt="" class="flex-none w-44 h-44 rounded-full object-cover" loading="lazy" decoding="async">
+            <div class="flex-auto">
+                <div class="text-base text-slate-900 font-semibold dark:text-slate-300">
+                    <a *ngIf="user.name && user.html_url" href="{{user.html_url}}">
+                        <h2><span class="absolute"></span>{{user.name}}</h2>
+                    </a>
+                    <blockquote *ngIf="user.bio" class="mt-3 text-slate-700 dark:text-slate-300">
+                        <p><i>{{user.bio}}</i></p>
+                    </blockquote>
+                </div>
+                <div class="text-base text-slate-900 font-semibold dark:text-slate-300 mt-0.5">
+                    <i *ngIf="user.company" class="fa fa-building" style="color: #ffffff;" aria-hidden="true"></i> &nbsp;&nbsp; {{user.company}}
+                    <br *ngIf="user.company"/>
+                    <i *ngIf="user.location" class="fa fa-map-marker" style="color: #ffffff;" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp; {{user.location}}
+                    <br *ngIf="user.location"/>
+                    <i *ngIf="user.twitter_username" class="fa fa-twitter" style="color: #ffffff;" aria-hidden="true"></i> &nbsp;&nbsp; <a href="https://twitter.com/{{user.twitter_username}}">{{user.twitter_username}}</a> 
+                </div>
+            </div>
+        </figcaption>
+    </figure>
+</div>
+
+<ng-template #noData>
+    <ng-container *ngIf="!apiService.inProgressStatus['getUser']">
+        <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+            <span class="font-medium">No Records found!</span>
+        </div>
+    </ng-container>
+</ng-template>
+
+<ng-container *ngIf="apiService.inProgressStatus['getUser']">
+    <div class="border border-blue-300 shadow rounded-md p-4 mt-10 w-full mx-auto">
+        <div class="flex space-x-4 animate-pulse">
+            <div class="rounded-full bg-slate-500 w-44 h-44 rounded-full object-cover" loading="lazy" decoding="async"></div>
+            <div class="flex-1 space-y-6 py-3">
+                <div class="h-2 bg-slate-600 rounded"></div>
+                <div class="h-2 bg-slate-600 rounded"></div>
+                <div class="text-base text-slate-900 font-semibold dark:text-slate-300 mt-0.5">
+                    <div class="h-2 bg-slate-600 rounded"></div>
+                    <br/>
+                    <div class="h-2 bg-slate-600 rounded"></div>
+                    <br/>
+                    <div class="h-2 bg-slate-600 rounded"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
